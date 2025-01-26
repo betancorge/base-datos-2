@@ -1,2 +1,3 @@
-# base-datos-2
-Yo soy la descripción
+# Repositorio prácticas de Base de datos
+
+Yo soy la descripción del repositorio.
