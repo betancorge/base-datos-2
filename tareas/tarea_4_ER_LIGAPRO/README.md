@@ -19,4 +19,4 @@ Por último se quiere almacenar, en la base de datos, los datos de los president
 ___Modelo entidad-relación resultante a través de diagrams.io.___
 <img src="images/tarea-4-ER_LIGAPRO.drawio.png>
 
- </div>
+</div>
