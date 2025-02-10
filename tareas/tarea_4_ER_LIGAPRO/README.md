@@ -1,10 +1,8 @@
 <div align="justify">
 
-# <img src=../../../../../images/computer.png width="40"> Code, Learn & Practice(E/R: Construye el diagrama basado en la descripción que se aporta)
+# E/R: Liga de Fútbol Profesional
 
-<img src=img/la-liga.png>
-
-## Descripción
+#### Descripción
 
 La liga de fútbol profesional ha decidido informatizar sus instalaciones creando una base de datos para guardar la información de los partidos que se juegan en la liga.
 
@@ -18,10 +16,7 @@ También se quiere llevar un recuento de los goles que hay en cada partido. Se q
 
 Por último se quiere almacenar, en la base de datos, los datos de los presidentes de los equipos de fútbol (dni, nombre, apellidos, fecha de nacimiento, equipo del que es presidente y año en el que fue elegido presidente). Un equipo de fútbol tan sólo puede tener un presidente, y una persona sólo puede ser presidente de un equipo de la liga.
 
-___Diseña el modelo entidad-relación resultante a través de diagrams.io.___
-
-<details>
-      <summary>PULSAR PARA VER LA ENTIDAD-RELACIÓN sobre LIGA FUTBOL PROFESIONAL</summary>
+___Modelo entidad-relación resultante a través de diagrams.io.___
 <img src="images/tarea-4-ER_LIGAPRO.drawio.png>
-</details>
+
  </div>
