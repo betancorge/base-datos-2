@@ -16,6 +16,6 @@ También se quiere llevar un recuento de los goles que hay en cada partido. Se q
 
 Por último se quiere almacenar, en la base de datos, los datos de los presidentes de los equipos de fútbol (dni, nombre, apellidos, fecha de nacimiento, equipo del que es presidente y año en el que fue elegido presidente). Un equipo de fútbol tan sólo puede tener un presidente, y una persona sólo puede ser presidente de un equipo de la liga.
 
-<img src="images/tarea-4-ER_LIGAPRO.drawio.png>
+<img src="images/tarea-4-ER_LIGAPRO.drawio.png">
 
 </div>
