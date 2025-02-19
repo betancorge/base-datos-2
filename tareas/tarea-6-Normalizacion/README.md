@@ -25,19 +25,32 @@
  Aplicando 1FN para asegurar que cada celda tenga datos atómicos y evitar repetición de datos.
  <br>
 ***Tabla de Lista de Productos:***
+| ID_Producto | Nombre_Producto | Proveedores  |  Categoría   | Precio |
+|------------|----------------|-----------------|------------|-----------|
+| 1          | Laptop         |  Dell      | Tecnología | 1000   |
+| 1          | Laptop         |  HP      | Tecnología | 1000   |
+| 2          | Mouse          |  Logitech  |Accesorios  | 25     |
+
+Cuando se aplica 2FN, se delimita qué depende directamente de la PK y qué no. Razonando que Nombre_producto, Categoría y Precio sí dependen
+directamente de la PK (ID_Producto), la Entidad Proveedores no es así. Puedo generar una tabla con  Precio que relacionae Productos con Proveedores.
+<br>
+***Nuevas tablas***:
 | ID_Producto | Nombre_Producto | Categoría   | Precio |
 |------------|----------------|-----------------|------------|
 | 1          | Laptop         | Tecnología | 1000   |
 | 2          | Mouse          | Accesorios | 25     |
 
-Cuando se aplica 2FN, se asegura que proveedores dependa de la clave primaria (ID_Producto, en este caso).
-<br>
-***Nueva tabla de Proveedores***:
-| ID_Producto | Proveedores      |
+| ID_Proveedor | Proveedor      |
 |------------|----------------|
-| 1          | Dell            | 
-| 1          | HP              |
-| 2          | Logitech        |
+| 101        | Dell            | 
+| 102        | HP              |
+| 103        | Logitech        |
+
+| ID_Producto | ID_Proveedor   | Precio |
+|------------|----------------|--------|
+| 101        | Dell            | 1000  |
+| 102        | HP              | 1000  |
+| 103        | Logitech        |   25  |
 
 
 
@@ -64,27 +77,52 @@ Cuando se aplica 2FN, se asegura que proveedores dependa de la clave primaria (I
 
 ### **RESPUESTA:**
 
- En este caso, parece que, aplicar la 1FN no se observan cambios porque no existen repetición de datos explícita y los datos de cada celda son atómicos.
+ En este caso, parece que, aplicar la 1FN se realizan los cambios pertinentes para conseguir que los datos sean atómicos. Se tiene qen cuenta que Cliente se convertirá en una nueva tabla con nombre y apellidos; Dirección de por sí es un campo que requiere, a su vez de otros, y por tanto requerirá una tabla:
  <br>
 ***Tabla de Pedidos de Clientes:***
-| ID_Pedido | Cliente   | Dirección       | Producto     | Cantidad | Precio |
-|----------|----------|---------------|-------------|----------|--------|
-| 101      | Juan Pérez | Calle 123     | Laptop      | 1        | 1000   |
-| 102      | Ana López | Av. Central   | Teclado     | 2        | 50     |
+| ID_Pedido | Producto     | Cantidad | Precio |
+|----------|----------|---------------|-------------|
+| 101      | Laptop      | 1        | 1000   |
+| 102      | Teclado     | 2        | 50     |
 
+***Tabla de Cliente:***
+| ID_Cliente| Nombre  | Apellido      |
+|----------|----------|---------------|
+| 2001      | Juan    | Perez         |
+| 2002     | Ana  | Lopez   | Teclado |
 
-Cuando se aplica 2FN, parece que la clave primaria es ID_Pedido. De esta PK dependen Cliente y Dirección. Ahora bien, Producto, Cantidad y Precio tienen una dependencia parcial puesto que aquellos dependen al mismo tiempo de ID_Pedido y del propio producto que el cliente pide. De esta manera, se pueden hacer las siguientes dos tablas:
+***Tabla de Dirección:***
+| Via | nombre  |
+|----------|----------|
+| Calle    | 123     |
+| Avenida  | Central |
+
+Cuando se aplica 2FN, se delimita qué depende directamente de la PK y qué no. Razonando que Cantidad es quien depende directamente de ID_Pedido, mientras que Producto y Precio, no. A continuación, genero las tablas que considero oportunas para no perder información.
 <br>
-***Nueva tablas: Pedido y Datos_producto***:
-| ID_Pedido  | Cliente      | Dirección |
-|------------|----------------|------------|
-| 101        | Juan Pérez     | Calle 123  |
-| 102        | Ana Pérez      | Av.Central |
+***Tabla de Pedidos:***
+| ID_Pedido | Cantidad | Precio |
+|----------|---------------|
+| 101      |  1        |
+| 102      | 2        | 
 
-| ID_Pedido  | Producto      | Cantidad | Precio |
-|------------|---------------|------------|------|
-| 101        | Laptop        |   1  | 1000  |
-| 102        | Teclado       |   2  | 50    |
+***Tabla de Productos:***
+
+| ID_Producto | Producto | Precio |
+|----------|----------|---------------|
+| 1001      | 1        | 1000   |
+| 1002      | 2        | 50     |
+
+***Tabla de Cliente:***
+| ID_Cliente| Nombre  | Apellido      |
+|----------|----------|---------------|
+| 2001      | Juan    | Perez         |
+| 2002     | Ana  | Lopez   | Teclado |
+
+***Tabla de Dirección (En el diagrama de ER, lo he puesto como atributo multivariado):***
+| Via | nombre_via  |
+|----------|----------|
+| Calle    | 123     |
+| Avenida  | Central |
 
   <img src="images/ejercicio2.drawio.png">
 ---
@@ -107,17 +145,35 @@ Cuando se aplica 2FN, parece que la clave primaria es ID_Pedido. De esta PK depe
 
 ### **RESPUESTA:**
 
- En este caso, se observa que teléfonos carece de datos atómicos. Se aplica 1FN y que la tabla de la siguiente manera:
+  En este caso, parece que, aplicar la 1FN se realizan los cambios pertinentes para conseguir que los datos sean atómicos. Se tiene en cuenta que Teléfonos se convertirá, más adelante, en una nueva tabla  "nombre" contendrá nombre y apellidos.
  <br>
-***Tabla de Registro de empleados:***
-| ID_Empleado | Nombre   | Teléfonos | Departamento     |
-|----------|----------|-------------|-------------------|
-| 1        | Carlos R.| 12345     | Ventas   |
-| 1        | Carlos R.| 67890     | Ventas   |
-| 2        | Laura M. | 54321     | Finanzas |
 
+***Tabla de Empleados:***
+| ID_Empleado | Nombre | Apellido | Telefono | Departamento |
+|----------|----------|-----------|-------------|---------|
+| 1      | Carlos    | Ramos      | 12345   | Ventas   |
+| 1      | Carlos    | Ramos      | 67890   | Ventas   |
+| 2      | Laura     | Martin     | 54321   | Finanzas |
 
-Cuando se aplica 2FN, teléfono depende de ID_Empleado (PK). No es necesario dividr más la tabla.
+Cuando se aplica 2FN, se delimita qué depende directamente de la PK y qué no.
+***Tabla de Empleados:***
+| ID_Empleado | Nombre | Apellido | Telefono | Departamento |
+|----------|----------|-----------|-------------|---------|
+| 1      | Carlos    | Ramos      | 12345   | Ventas   |
+| 1      | Carlos    | Ramos      | 67890   | Ventas   |
+| 2      | Laura     | Martin     | 54321   | Finanzas |
+
+***Tabla de Departamento:***
+| ID_Departamento | Departamento |
+|------------|----------------|
+| 1001       | Ventas   |
+| 1002       |  Finanzas |
+
+***Tabla de Telefonos:***
+| ID_Empleado | Telefono_1 | Telefono_2  |
+|----------|----------|---------|
+| 1      | 12345    | 67890     | 
+| 2      | 54321     | null     |
 <br>
 
   <img src="images/ejercicio3.drawio.png">
@@ -142,6 +198,7 @@ Cuando se aplica 2FN, teléfono depende de ID_Empleado (PK). No es necesario div
 ### **RESPUESTA:**
  En este caso, se observa que las fechas no dispone de datos atómicos. Se aplica 1FN y que la tabla de la siguiente manera:
  <br>
+
 ***Tabla de Reservas de Hotel:***
 | ID_Reserva | Cliente    | Habitación | Fecha  | Precio |
 |------------|-----------|------------|---------|--------|
@@ -152,21 +209,31 @@ Cuando se aplica 2FN, teléfono depende de ID_Empleado (PK). No es necesario div
 | 5002      | María T.  | 202        | 11/03 | 200    |
 
 
-Cuando se aplica 2FN, teléfono depende de ID_Empleado (PK). No es necesario dividr más la tabla. Considero que Fecha tiene una dependencia parcial tanto de ID_Reserva como de Habitación. Las tablas quedan de la siguiente forma:
+Cuando se aplica 2FN, se delimita qué depende directamente de la PK y qué no.
 <br>
-***Nueva tablas: Reserva y Fecha_reserva***:
-| ID_Reserva  | Cliente     | Habitacion | Precio |
-|------------|--------------|------------|--------|
-| 5001       | Pedro G.     | 101        | 300    |
-| 5002       | María T.      | Av.Central |
 
-| ID_Reserva  |    Fecha    |
+***Tabla cliente***:
+
+| ID_Cliente| Nombre     | Apellido |
+|-----------|--------------|------------|
+| 1         | Pedro G.     | Gonzalez   | 
+| 2         | María T.      | Torres    |
+
+***Tabla de reservas:***
+| ID_Reserva  | ID_Cliente     | Num_Habitacion | Fecha  |
+|------------|--------------|------------|--------|
+| 5001       | 1            | 101        |  01/02 |
+| 5001       | 1            | 101        |  02/02 |
+| 5001       | 1            | 101        |  03/02 |
+| 5002       | 2            | 102        |  10/03 |
+| 5002       | 2            | 102        |  11/03 |
+
+***Tabla de habitación:***
+| Num_Habitación  |  Precio |
 |------------|--------------|
-| 5001       | 01/02        |   
-| 5001       | 02/02        | 
-| 5001       | 03/02        | 
-| 5002       | 10/03        | 
-| 5002       | 11/03        | 
+|    101      |   300      |
+|    102      |   200      |
+
 
   <img src="images/ejercicio4.drawio.png">
 ---
