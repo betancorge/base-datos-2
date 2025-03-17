@@ -212,14 +212,9 @@ Realiza la inserción en la tabla `Ejemplo` de las __50 entradas__.
     >__Nota__: Podemos observar con detenimiento que los registros de id 45 e id 48 tienen mal insertada la fecha. Para arreglarlo, ejecutando los siguientes comandos de manera consecutiva:
 
     ```bash
-    UPDATE Ejemplo SET fecha = '2026-01-16' WHERE id =         +----+------------+--------+---------+------------+----------+
-        | id |   texto    | entero | decimal |   fecha    | booleano |
-        +----+------------+--------+---------+------------+----------+
-        | 9  | Ejemplo 9  | 41     | 55.0    | 2025-03-17 | 0        |
-        | 29 | Modificado | 37     | 50.0    | 2025-03-17 | 0        |
-        | 49 | Modificado | 38     | 50.0    | 2025-03-17 | 0        |
-        +----+------------+--------+---------+------------+----------+
-        sqlite> 
+    UPDATE Ejemplo SET fecha = '2026-01-16' WHERE id =  45;
+    UPDATE Ejemplo SET fecha = '2026-04-08' WHERE id = 48;       
+        sqlite>  
     ```bash
         sqlite> SELECT *FROM Ejemplo;
         +----+------------+--------+---------+------------+----------+
