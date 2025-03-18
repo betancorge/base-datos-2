@@ -214,7 +214,8 @@ Realiza la inserción en la tabla `Ejemplo` de las __50 entradas__.
     ```bash
     UPDATE Ejemplo SET fecha = '2026-01-16' WHERE id =  45;
     UPDATE Ejemplo SET fecha = '2026-04-08' WHERE id = 48;       
-        sqlite>  
+
+        sqlite> 
     ```bash
         sqlite> SELECT *FROM Ejemplo;
         +----+------------+--------+---------+------------+----------+
