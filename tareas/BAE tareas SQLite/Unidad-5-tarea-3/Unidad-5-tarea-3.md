@@ -374,8 +374,20 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     | 10:59:08     |
     +--------------+
     sqlite> 
+    ```
+    - Nota: Realizando un repaso he añadido, por mi cuenta que, si se quiere poner la fecha y la hora se puede hacer uso del comando DATETIME:
 
     ```
+    sqlite> SELECT DATETIME('now');
+    +---------------------+
+    |   DATETIME('now')   |
+    +---------------------+
+    | 2025-03-19 10:58:14 |
+    +---------------------+
+    sqlite> 
+
+    ```
+
 - Funciones de Conversión (CAST):
   - Convierte el salario a un valor de punto flotante.
       ```
@@ -481,6 +493,32 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
       +----+-----------+---------+------------------+
       sqlite> 
       ```
+      - Nota: Como estuvimos viendo en la clase de ayer (18/03/2025) es más eficiente realizar una consulta con expresión regular quedando de la siiguiente manera:
+
+      ```
+      sqlite> SELECT * FROM empleados WHERE nombre REGEXP 'a' ORDER BY salario ASC;
+      +----+-----------+---------+------------------+
+      | id |  nombre   | salario |   departamento   |
+      +----+-----------+---------+------------------+
+      | 16 | Patricia  | 47000.0 | Recursos Humanos |
+      | 4  | Ana       | 48000.0 | Recursos Humanos |
+      | 7  | Javier    | 48000.0 | Recursos Humanos |
+      | 12 | Sofía     | 49000.0 | Ventas           |
+      | 1  | Juan      | 50000.0 | Ventas           |
+      | 6  | Laura     | 52000.0 | Ventas           |
+      | 14 | Isabel    | 53000.0 | TI               |
+      | 18 | Natalia   | 54000.0 | Ventas           |
+      | 3  | Carlos    | 55000.0 | Ventas           |
+      | 10 | Elena     | 55000.0 | Recursos Humanos |
+      | 2  | María     | 60000.0 | TI               |
+      | 20 | Beatriz   | 63000.0 | TI               |
+      | 8  | Carmen    | 65000.0 | TI               |
+      | 15 | Raúl      | 68000.0 | Ventas           |
+      | 17 | Alejandro | 71000.0 | TI               |
+      +----+-----------+---------+------------------+
+
+      ```
+
 
 - Empleados en el departamento 'Recursos Humanos' con salarios entre 45000 y 55000.
 
@@ -526,6 +564,21 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
   +----+---------+---------+--------------+
   sqlite>
   ```
+
+  - Nota: También se puede realizar la consulta con una expresión regular:
+
+  ```
+    sqlite> SELECT * FROM empleados WHERE nombre REGEXP 'M|N';
+    +----+---------+---------+--------------+
+    | id | nombre  | salario | departamento |
+    +----+---------+---------+--------------+
+    | 2  | María   | 60000.0 | TI           |
+    | 9  | Miguel  | 51000.0 | Ventas       |
+    | 18 | Natalia | 54000.0 | Ventas       |
+    +----+---------+---------+--------------+
+
+  ```
+
 - Empleados en el departamento 'TI' o 'Ventas' ordenados alfabéticamente por nombre.
 
     ```
@@ -590,6 +643,22 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     sqlite>
 
   ```
+
+  - Nota: También se puede realizar la misma consulta usando las expresiones regulares de la siguienta manera:
+
+  ```
+  sqlite> SELECT * FROM empleados WHERE departamento = 'Ventas' AND nombre REGEXP '[o,a]$';
+  +----+---------+---------+--------------+
+  | id | nombre  | salario | departamento |
+  +----+---------+---------+--------------+
+  | 6  | Laura   | 52000.0 | Ventas       |
+  | 12 | Sofía   | 49000.0 | Ventas       |
+  | 18 | Natalia | 54000.0 | Ventas       |
+  +----+---------+---------+--------------+
+  sqlite> 
+
+  ```
+
 - Empleados con salarios fuera del rango de 55000 a 70000, ordenados por departamento.
     ```
   sqlite> SELECT * FROM empleados WHERE salario NOT BETWEEN 55000 AND 70000 ORDER BY departamento;
@@ -623,7 +692,19 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     +----+----------+---------+------------------+
     sqlite>
     ```
+  -Nota: Tamnién se puede usar una expresión regular para realizar dicha consulta de la siguiente manera:
 
+  ```
+  sqlite> SELECT * FROM empleados WHERE departamento = 'Recursos Humanos' AND nombre REGEXP '^[^e]*$';
+  +----+----------+---------+------------------+
+  | id |  nombre  | salario |   departamento   |
+  +----+----------+---------+------------------+
+  | 4  | Ana      | 48000.0 | Recursos Humanos |
+  | 13 | Andrés   | 60000.0 | Recursos Humanos |
+  | 16 | Patricia | 47000.0 | Recursos Humanos |
+  +----+----------+---------+------------------+
+  sqlite> 
+  ```
 </div>
 
 </div>
