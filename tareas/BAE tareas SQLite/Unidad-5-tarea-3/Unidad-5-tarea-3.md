@@ -169,6 +169,19 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     sqlite>
 
     ```
+  - Para mostrar tanto la fecha como la hora:
+
+  ```
+      sqlite> SELECT DATETIME('now');
+    +---------------------+
+    |   DATETIME('now')   |
+    +---------------------+
+    | 2025-03-19 10:58:14 |
+    +---------------------+
+    sqlite> 
+
+  ```
+
 - Funciones de Agregación:
   - Calcula el promedio de salarios de todos los empleados.
       ```
@@ -250,6 +263,16 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     +---------------------------------+
     sqlite>
     ```
+  - Nota: Usé la forma " || ' - ' ||" porque CONCAT_WS no me funcionaba:
+
+    ```
+    sqlite> SELECT CONCAT_WS(' - ', nombre, departamento) FROM empleados;
+    Error: in prepare, no such function: CONCAT_WS (1)
+    sqlite> 
+
+    ```
+
+
 - Funciones de Control de Flujo (CASE):
   - Categoriza a los empleados según sus salarios.
       ```
