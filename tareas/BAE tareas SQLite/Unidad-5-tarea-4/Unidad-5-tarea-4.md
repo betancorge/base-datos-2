@@ -197,6 +197,30 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     | 20 | Cerveza          | Bebidas   | 3.8    |
     +----+------------------+-----------+--------+
     sqlite> 
+    ```
+    - NOTA: También se puede realizar esta consulta con una expresión regular de la siguiente manera:
+
+    ```
+    sqlite> SELECT * FROM productos WHERE nombre REGEXP 'a|A';
+    +----+------------------+-----------+--------+
+    | id |      nombre      | categoria | precio |
+    +----+------------------+-----------+--------+
+    | 1  | Arroz            | Alimentos | 2.5    |
+    | 3  | Pan              | Panadería | 1.2    |
+    | 4  | Manzanas         | Frutas    | 3.0    |
+    | 8  | Tomates          | Verduras  | 2.2    |
+    | 10 | Cereal           | Desayuno  | 3.5    |
+    | 11 | Papel Higiénico  | Hogar     | 1.5    |
+    | 14 | Galletas         | Snacks    | 1.7    |
+    | 15 | Aceite de Oliva  | Cocina    | 4.5    |
+    | 16 | Café             | Bebidas   | 5.0    |
+    | 17 | Sopa enlatada    | Conservas | 2.3    |
+    | 18 | Jabón de Baño    | Higiene   | 1.2    |
+    | 19 | Botellas de Agua | Bebidas   | 1.0    |
+    | 20 | Cerveza          | Bebidas   | 3.8    |
+    +----+------------------+-----------+--------+
+    sqlite> 
+
 
     ```
     
@@ -259,9 +283,8 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     | 20 | Cerveza            | Bebidas   | 3.8    |
     +----+--------------------+-----------+--------+
     sqlite>
-
     ```
-    
+
 - Calcular el precio promedio de los productos en la categoría "Snacks".
 
 
@@ -355,6 +378,20 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
 
     ```
     sqlite> SELECT * FROM productos WHERE nombre LIKE 'P%';
+    +----+-----------------+-----------+--------+
+    | id |     nombre      | categoria | precio |
+    +----+-----------------+-----------+--------+
+    | 3  | Pan             | Panadería | 1.2    |
+    | 5  | Pollo           | Carnes    | 5.5    |
+    | 11 | Papel Higiénico | Hogar     | 1.5    |
+    +----+-----------------+-----------+--------+
+    sqlite> 
+
+    ```
+    -NOTA: La misma consulta se puede realizar con una expresión regular de la siguiente forma:
+
+    ```
+    sqlite> SELECT *FROM productos WHERE nombre REGEXP '^P';
     +----+-----------------+-----------+--------+
     | id |     nombre      | categoria | precio |
     +----+-----------------+-----------+--------+
@@ -535,7 +572,7 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
 
     ```
         sqlite> SELECT * FROM productos WHERE precio = (SELECT AVG(precio) FROM productos);
-        qlite> 
+        sqlite> 
 
     ```
 
@@ -570,6 +607,21 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
         +----+-----------------+-----------+--------+
         sqlite> 
     ```
+
+    - NOTA: Usando una expresión regular, esta consulta se puede realizar de la siguiente manera:
+
+    ```
+    sqlite> SELECT * FROM productos WHERE nombre REGEXP 'o$';
+    +----+-----------------+-----------+--------+
+    | id |     nombre      | categoria | precio |
+    +----+-----------------+-----------+--------+
+    | 5  | Pollo           | Carnes    | 5.5    |
+    | 9  | Queso           | Lácteos   | 4.0    |
+    | 11 | Papel Higiénico | Hogar     | 1.5    |
+    | 18 | Jabón de Baño   | Higiene   | 1.2    |
+    +----+-----------------+-----------+--------+
+    sqlite> 
+    ```
     
 - Encontrar los productos que han sido vendidos en más de una fecha.
 
@@ -594,6 +646,23 @@ Realiza las siguientes consultas, y muestra el resultado obtenido:
     | 13 | Detergente | Limpieza  | 2.8    |
     +----+------------+-----------+--------+
     sqlite> 
+    ```
+
+    - NOTA: Usando una expresión regular, se puede ver de la siguiente forma:
+
+    ```
+    sqlite> SELECT * FROM productos WHERE categoria REGEXP '^L';
+    +----+------------+-----------+--------+
+    | id |   nombre   | categoria | precio |
+    +----+------------+-----------+--------+
+    | 2  | Leche      | Lácteos   | 1.8    |
+    | 6  | Huevos     | Lácteos   | 1.0    |
+    | 7  | Yogurt     | Lácteos   | 2.0    |
+    | 9  | Queso      | Lácteos   | 4.0    |
+    | 13 | Detergente | Limpieza  | 2.8    |
+    +----+------------+-----------+--------+
+    sqlite> 
+
     ```
     
 - Calcular el total de ventas para cada producto en la fecha '2024-01-17'.
